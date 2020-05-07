@@ -5,8 +5,10 @@ const port = process.env.PORT
 const crypto = require('crypto')
 const childproc = require('child_process')
 
-app.get('/webhook', (req, res) => {
-    var hash = "sha1=" + crypto.createHmac('sha1', process.env.SECRET_KEY).update(jsonString).digest('hex')
+app.use(express.json())
+
+app.post('/webhook', (req, res) => {
+    var hash = "sha1=" + crypto.createHmac('sha1', process.env.SECRET_KEY).update(JSON.stringify(req.body)).digest('hex')
     if(hash != req.headers['x-hub-signature']){
         console.log('invalid key');
         res.end({error: 'invalid key'})
