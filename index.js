@@ -16,6 +16,7 @@ app.post('/webhook', (req, res) => {
     }
 
     childproc.spawn('sh', ['script.sh'])
+    console.log('success')
     res.json({success: 'success'})
 })
 
