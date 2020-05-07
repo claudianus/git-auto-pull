@@ -1,9 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT
 const crypto = require('crypto')
 const childproc = require('child_process')
-require('dotenv').config()
 
 app.get('/webhook', (req, res) => {
     var hash = "sha1=" + crypto.createHmac('sha1', secret).update(jsonString).digest('hex')
